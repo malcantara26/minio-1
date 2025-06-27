@@ -2,9 +2,6 @@ services:
   minio:
     image: minio/minio
     command: server /data
-    environment:
-      MINIO_ACCESS_KEY: admin
-      MINIO_SECRET_KEY: Voipera
     volumes:
       - minio_data:/data
     labels:
