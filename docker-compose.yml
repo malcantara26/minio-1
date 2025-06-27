@@ -2,7 +2,7 @@
      minio:
        image: minio/minio
        ports:
-         - "9001:9000"
+         - "9200:9000"
        volumes:
          - minio_data:/data
        environment:
