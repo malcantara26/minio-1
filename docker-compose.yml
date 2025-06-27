@@ -1,14 +1,17 @@
-   services:
-     minio:
-       image: minio/minio
-       ports:
-         - "9300:9000"
-       volumes:
-         - minio_data:/data
-       environment:
-         MINIO_ACCESS_KEY: admin
-         MINIO_SECRET_KEY: Voipera
-       command: server /data
+services:
+  minio:
+    image: minio/minio
+    command: server /data
+    environment:
+      MINIO_ACCESS_KEY: admin
+      MINIO_SECRET_KEY: Voipera
+    volumes:
+      - minio_data:/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.minio.rule=Host(`https://fazapps1-minio1-1.6bv96u.easypanel.host/`)"   # ajuste para seu domínio
+      - "traefik.http.routers.minio.entrypoints=web,websecure"
+      - "traefik.http.services.minio.loadbalancer.server.port=9000"
 
-   volumes:
-     minio_data:
+volumes:
+  minio_data:
